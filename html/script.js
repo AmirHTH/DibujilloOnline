@@ -10,42 +10,57 @@ window.addEventListener("load",init);
 wsUri = "ws://echo.websocket.org";
 
 function init() {
-	output= document.getElementById("output");
+    console.log("init entry");
+	output= document.getElementById("input");
+    console.log("init output");
 	testWebSocket();
+    console.log("init end");
 }
 
-function testWebSocket() { 
-	websocket = new WebSocket(wsUri); 
+function testWebSocket() {
+    console.log("testWebSocket entry");
+	websocket = new WebSocket(wsUri);
+    console.log("testWebSocket metods")
 	websocket.onopen = onOpen; 
 	websocket.onclose = onClose; 
 	websocket.onmessage = onMessage;
 	websocket.onerror = onError;
+    console.log("testWebSocket end")
 }
 
 function onOpen() {
-	writeToScreen("CONNECTED"); 
-	doSend("Hello Websocket!!"); 
+	console.log("onOpen entry")
+	writeToScreen("CONNECTED");
+	console.log("onOpen write")
+	doSend("Hello Websoket!!");
+	console.log("onOpen end")
 }
 
-function onClose() { 
+function onClose() {
+	console.log("onClose entry")
 	writeToScreen("DISCONNECTED");
 } 
 
 function onMessage(evt) {
+	console.log("onMessage entry")
 	writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data + '</span>'); websocket.close();
 }
 
-function onError(evt) { 
+function onError(evt) {
+	console.log("onError entry")
 	writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
 }
 
-function doSend(message) { 
-	writeToScreen("SENT: " + message); 
+function doSend(message) {
+	console.log("doSend entry")
+
+	writeToScreen("SENT: " + message);
 	websocket.send(message);
 }
 
-function writeToScreen(message) { 
-	var pre = document.createElement("p"); 
-	pre.innerHTML = message; 
+function writeToScreen(message) {
+	console.log("writeToScreen entry")
+	var pre = document.createElement("p");
+	pre.innerHTML = message;
 	output.appendChild(pre);
 }
