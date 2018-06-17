@@ -1,0 +1,23 @@
+{
+  "name": "mywebsocketserver",
+  "version": "1.0.0",
+  "description": "WebSocket playgorund ",
+  "main": "server.js",
+  "dependencies": {
+    "ws": "^5.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmirHTH/DibujilloOnline.git"
+  },
+  "author": "uo240753",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmirHTH/DibujilloOnline/issues"
+  },
+  "homepage": "https://github.com/AmirHTH/DibujilloOnline#readme"
+}

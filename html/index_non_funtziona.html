@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test fabric js </title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css"/>
+
+
+</head>
+<body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+
+    <div id="input"/>
+    <script>
+
+        var canvas = new fabric.Canvas('canvas');
+
+        var rect = new fabric.Rect({
+
+           top : 100,
+           left: 100,
+           width: 60,
+           heigth: 70,
+           fill: 'red'
+
+        });
+
+        canvas.add(rect);
+
+    </script>
+
+
+</body>
+</html>
