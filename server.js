@@ -9,9 +9,11 @@ wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(message) {
         console.log('received: %s', message);
         clients.forEach(function(client) {
+           //if (!client.readyState == 3) {
 
             client.send(message);
 
+           // }
         });
     });
 });

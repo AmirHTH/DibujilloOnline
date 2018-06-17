@@ -20,7 +20,13 @@ function initDraw() {
     canvas = new fabric.Canvas('canvas');
     canvas.freeDrawingBrush.color = 'green';
     canvas.freeDrawingBrush.lineWidth = 10;
-    //canvas.addEventListener("onmouseup", sendall);
+
+  //  canvas.addEventListener('click', sendAllCanvasBroadCast, false);
+
+   /* canvas.click = function (sendAllCanvasBroadCast) {
+        console.log("calling sendAllCanvasBroadCast");
+
+    };*/
 
     addCircle.addEventListener('click', addCircleHandler);
     addRectangle.addEventListener('click', addRectangleHandler);
@@ -100,22 +106,24 @@ function connectionOpen() {
 }
 
 function onMessageFromServer(message) {
-	console.log('received: '+ message);
     console.log('received data: '+ message.data);
 	if (isJson(message.data)) {
 		var obj = JSON.parse(message.data);
-		console.log("got data from server");
-		drawRecivedObj(obj.type, obj.data);
+		console.log("got shape data from server");
+        canvas.loadFromJSON(JSON.parse(message.data), canvas.renderAll.bind(canvas));
+		//drawRecivedObj(obj.type, obj.data);
 	} else {
-		// si no es un json será un mensaje del chat ?
+        console.log("WARNING: other info recived: "+ JSON.parse(message.data));
+        canvas.loadFromJSON(JSON.parse(message.data), canvas.renderAll.bind(canvas));
 	}
 }
 
 function addObject(type, obj) {
-    websocket.send(JSON.stringify({
-        'type': type,
-        'data': obj
-    }))	;
+    //websocket.send(JSON.stringify({ 'type': type, 'data': obj  }))	;
+
+    websocket.send(
+        JSON.stringify(
+            canvas.toJSON()));
 }
 
 function sendObject(type, obj) {
@@ -141,6 +149,13 @@ function drawRecivedObj(type, obj) {
     }
     canvas.add(shape);
 }
+
+function sendAllCanvasBroadCast () {
+    Console.log("levantando raton");
+    websocket.send(JSON.stringify(canvas.json()));
+}
+
+
 
 
 function testWebSocket() {
