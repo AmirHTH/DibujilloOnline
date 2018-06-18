@@ -6,19 +6,21 @@ if (window.WebSocket) {
 }
 
 window.addEventListener("load",init);
-window.addEventListener("load",initDraw);
 
 //wsUri = "ws://echo.websocket.org";
 wsUri = "ws://localhost:9001";
 
+var ID = Math.floor((Math.random() * 100000000) + 2);
 
-function initDraw() {
-    console.log("initDraw entry with uri: "+wsUri);
+function init() {
+    console.log("init() entry with uri: "+wsUri);
     initServer();
-    console.log("initDraw server inited");
+    console.log("init() server inited");
+
+    output= document.getElementById("input");
 
     canvas = new fabric.Canvas('canvas');
-    canvas.freeDrawingBrush.color = 'green';
+    canvas.freeDrawingBrush.color = 'cyan';
     canvas.freeDrawingBrush.lineWidth = 10;
 
   //  canvas.addEventListener('click', sendAllCanvasBroadCast, false);
@@ -34,15 +36,22 @@ function initDraw() {
     pencil.addEventListener('click', pencilHandler);
     selection.addEventListener('click', selectionHandler);
 
-    console.log("initDraw end");
+
+
+    console.log("init() end");
+
+    this.canvas.on({
+        'path:created': this.addObject.bind(this),
+        'object:modified': this.addObject.bind(this),
+        'object:moving': this.addObject.bind(this),
+        'object:scaling': this.addObject.bind(this),
+        'object:rotating': this.addObject.bind(this),
+        'object:skewing': this.addObject.bind(this),
+        'object:mousemove': this.addObject.bind(this),
+
+    })
 }
-function init() {
-    console.log("init entry with uri: "+wsUri);
-	//output= document.getElementById("input");
-    console.log("init output");
-	//testWebSocket();
-    console.log("init end");
-}
+
 
 function isJson (str) {
 	try {
@@ -94,41 +103,45 @@ function selectionHandler() {
 }
 
 
-function initServer() {
-	// unificar con el testWebSocket
-    websocket = new WebSocket(wsUri);
-    websocket.onopen = connectionOpen;
-    websocket.onmessage = onMessageFromServer;
-}
-
 function connectionOpen() {
-	websocket.send('connection open');
+    writeToScreen('<span style="color: green;">CONNECTED</span> ');
+    //websocket.send('connection open');
+    console.log("onOpen end");
+
 }
 
 function onMessageFromServer(message) {
     console.log('received data: '+ message.data);
-	if (isJson(message.data)) {
-		var obj = JSON.parse(message.data);
+    var res = message.data.split("@");
+    var datos = res[1];
+    var idNum = res[0];
+	if (isJson(datos)) {
+		var obj = JSON.parse(datos);
 		console.log("got shape data from server");
-        canvas.loadFromJSON(JSON.parse(message.data), canvas.renderAll.bind(canvas));
+        if (idNum != ID) {
+    canvas.loadFromJSON(JSON.parse(datos), canvas.renderAll.bind(canvas));
+} else {
+    console.log("sender and reciver are the same, ignoring");
+}
+
 		//drawRecivedObj(obj.type, obj.data);
 	} else {
-        console.log("WARNING: other info recived: "+ JSON.parse(message.data));
-        canvas.loadFromJSON(JSON.parse(message.data), canvas.renderAll.bind(canvas));
+        console.log("WARNING: other info recived: "+ (datos));
+        //canvas.loadFromJSON(JSON.parse(message.data), canvas.renderAll.bind(canvas));
 	}
 }
 
-function addObject(type, obj) {
+function addObject() {
     //websocket.send(JSON.stringify({ 'type': type, 'data': obj  }))	;
 
-    websocket.send(
+    websocket.send(ID+"@"+
         JSON.stringify(
             canvas.toJSON()));
 }
 
 function sendObject(type, obj) {
     drawRecivedObj(type,obj);
-	addObject(type,obj);
+	addObject();
 
 }
 
@@ -150,54 +163,31 @@ function drawRecivedObj(type, obj) {
     canvas.add(shape);
 }
 
-function sendAllCanvasBroadCast () {
-    Console.log("levantando raton");
-    websocket.send(JSON.stringify(canvas.json()));
+function initServer() {
+    // unificar con el testWebSocket
+    websocket = new WebSocket(wsUri);
+    websocket.onopen = connectionOpen;
+    websocket.onmessage = onMessageFromServer;
+    websocket.onclose = onClose;
+    websocket.onerror = onError;
 }
 
-
-
-
-function testWebSocket() {
-    console.log("testWebSocket entry");
-	websocket = new WebSocketty(wsUri);
-    console.log("testWebSocket metods")
-	websocket.onopen = onOpen; 
-	websocket.onclose = onClose; 
-	websocket.onmessage = onMessage;
-	websocket.onerror = onError;
-    console.log("testWebSocket end")
-}
-
-function onOpen() {
-	console.log("onOpen entry")
-	writeToScreen("CONNECTED");
-	console.log("onOpen write")
-	doSend("Hello Websoket!!");
-	console.log("onOpen end")
-}
 
 function onClose() {
 	console.log("onClose entry")
-	writeToScreen("DISCONNECTED");
-} 
-
-function onMessage(evt) {
-	console.log("onMessage entry")
-	writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data + '</span>'); websocket.close();
+    writeToScreen('<span style="color: red;">DISCONNECTED</span> ');
+	websocket.terminate();
+    websocket.close();
 }
+
 
 function onError(evt) {
 	console.log("onError entry")
 	writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+    websocket.terminate();
+	websocket.close();
 }
 
-function doSend(message) {
-	console.log("doSend entry")
-
-	writeToScreen("SENT: " + message);
-	websocket.send(message);
-}
 
 function writeToScreen(message) {
 	console.log("writeToScreen entry")

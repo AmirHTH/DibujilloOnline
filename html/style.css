@@ -1,6 +1,16 @@
 body {
-	background-color: #fff;
-	width:90%;
-	margin: 0 auto;
+	background-color: #eee;
+	width: 80%;
+	margin: 0.2em auto;
+	padding:2%;
 	font-family: Verdana;
+}
+
+#input {
+	height:80%;
+}
+
+#canvas {
+	margin: 0.5% auto;
+	border:1px solid black;
 }
