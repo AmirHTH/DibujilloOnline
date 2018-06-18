@@ -5,14 +5,32 @@ if (window.WebSocket) {
 	alert("WebSocket FAIL. Upgrade needed.");
 }
 
-window.addEventListener("load",init);
+//window.addEventListener("load",init);
 
 //wsUri = "ws://echo.websocket.org";
 wsUri = "ws://localhost:9001";
 
 var ID = Math.floor((Math.random() * 100000000) + 2);
 
+function validate() {
+
+    console.log("ENTRA A VALIDATE");
+    var username = document.getElementById("user").value;
+    var password = document.getElementById("pass").value;
+    if ( username == "aa" && password == "aa"){
+        alert ("Login successfully");
+        init();
+        //return true;
+    } else {
+        alert ("Login FAIL");
+        location.href="www.google.com";
+        //return false;
+    }
+}
+
+
 function init() {
+
     console.log("init() entry with uri: "+wsUri);
     initServer();
     console.log("init() server inited");
@@ -35,8 +53,6 @@ function init() {
     addTriangle.addEventListener('click', addTriangleHandler);
     pencil.addEventListener('click', pencilHandler);
     selection.addEventListener('click', selectionHandler);
-
-
 
     console.log("init() end");
 
@@ -176,7 +192,7 @@ function initServer() {
 function onClose() {
 	console.log("onClose entry")
     writeToScreen('<span style="color: red;">DISCONNECTED</span> ');
-	websocket.terminate();
+	//websocket.terminate();
     websocket.close();
 }
 
@@ -184,7 +200,7 @@ function onClose() {
 function onError(evt) {
 	console.log("onError entry")
 	writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
-    websocket.terminate();
+    //websocket.terminate();
 	websocket.close();
 }
 
