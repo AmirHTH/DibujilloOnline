@@ -23,7 +23,7 @@ function validate() {
         //return true;
     } else {
         alert ("Login FAIL");
-        location.href="www.google.com";
+        location.href="indexNOPE.html";
         //return false;
     }
 }
