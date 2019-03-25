@@ -54,6 +54,8 @@ function init() {
     pencil.addEventListener('click', pencilHandler);
     selection.addEventListener('click', selectionHandler);
 
+    descargar.addEventListener('click', descargarJson);
+
     console.log("init() end");
 
     this.canvas.on({
@@ -116,6 +118,22 @@ function pencilHandler() {
 
 function selectionHandler() {
 	canvas.isDrawingMode =false;
+}
+
+
+
+function descargarJson() {
+    console.log('descargando JSON');
+    JSON.stringify(canvas.toJSON())
+    
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(canvas.toJSON())));
+    element.setAttribute('download', 'archivo_Json_seguridad.txt');
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
 }
 
 
