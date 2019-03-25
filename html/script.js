@@ -40,6 +40,7 @@ function init() {
     canvas = new fabric.Canvas('canvas');
     canvas.freeDrawingBrush.color = 'cyan';
     canvas.freeDrawingBrush.lineWidth = 10;
+    
 
   //  canvas.addEventListener('click', sendAllCanvasBroadCast, false);
 
@@ -147,6 +148,8 @@ function connectionOpen() {
 function onMessageFromServer(message) {
     console.log('received data: '+ message.data);
     var res = message.data.split("@");
+    var numUsrs = res[2];
+    if (numUsrs!=null) { writeToScreen('<span style="color: blue;">Hay '+numUsrs+' usuarios</span> ');}  
     var datos = res[1];
     var idNum = res[0];
 	if (isJson(datos)) {
@@ -210,7 +213,7 @@ function initServer() {
 function onClose() {
 	console.log("onClose entry")
     writeToScreen('<span style="color: red;">DISCONNECTED</span> ');
-	//websocket.terminate();
+    //websocket.terminate();
     websocket.close();
 }
 

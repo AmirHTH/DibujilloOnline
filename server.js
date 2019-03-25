@@ -1,7 +1,8 @@
 var WebSocketServer = require('ws').Server;
 wss = new WebSocketServer ({ port:9001 });
 var clients = [];
-var oldMsg = "1";
+//var oldMsg = "1";
+
 
 console.log('Lanzando');
 
@@ -15,7 +16,7 @@ wss.on('connection', function connection(ws) {
             if (client.readyState === client.OPEN) {
                // if (message.length >= oldMsg.length) {
                    // oldMsg = message;
-                    client.send(message);
+                    client.send(message+"@"+clients.length);
                // }
             }
         });
