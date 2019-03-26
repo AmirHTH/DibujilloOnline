@@ -3,20 +3,36 @@ wss = new WebSocketServer ({ port:9001 });
 var clients = [];
 //var oldMsg = "1";
 
+var contador=0;
+
 
 console.log('Lanzando');
+/*
+wss.on('close', function() {
+    console.log("connection closed");
+    clients.splice(clients.indexOf(ws), 1);
+  });*/
 
 wss.on('connection', function connection(ws) {
     //var con = request.accept('any-protocol', request.origin)
     clients.push(ws)
     ws.send("conectado", "pepe");
+   // ws.on('marchaUSR',  function incoming(ws) { console.log("cerrando"+ws); clients.pop(ws); });
     ws.on('message', function incoming(message) {
-       // console.log('received: %s', message);
+        //console.log('received: %s', message);
+        if(message.includes('marchaUSR'))
+        {
+           contador--;
+        }
+        if(message.includes('entraUSR'))
+        {
+           contador++;
+        }
         clients.forEach(function(client) {
             if (client.readyState === client.OPEN) {
                // if (message.length >= oldMsg.length) {
                    // oldMsg = message;
-                    client.send(message+"@"+clients.length);
+                    client.send(message+"@"+contador);
                // }
             }
         });

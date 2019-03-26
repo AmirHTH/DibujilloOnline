@@ -35,7 +35,7 @@ function init() {
     initServer();
     console.log("init() server inited");
 
-    output= document.getElementById("input");
+    output= document.getElementById("input");    
 
     canvas = new fabric.Canvas('canvas');
     canvas.freeDrawingBrush.color = 'cyan';
@@ -56,6 +56,7 @@ function init() {
     selection.addEventListener('click', selectionHandler);
 
     descargar.addEventListener('click', descargarJson);
+    cerrar.addEventListener('click', onClose);
 
     console.log("init() end");
 
@@ -142,6 +143,7 @@ function connectionOpen() {
     writeToScreen('<span style="color: green;">CONNECTED</span> ');
     //websocket.send('connection open');
     console.log("onOpen end");
+    websocket.send('entraUSR');
 
 }
 
@@ -149,18 +151,18 @@ function onMessageFromServer(message) {
     console.log('received data: '+ message.data);
     var res = message.data.split("@");
     var numUsrs = res[2];
-    if (numUsrs!=null) { writeToScreen('<span style="color: blue;">Hay '+numUsrs+' usuarios</span> ');}  
+   
+    if (numUsrs!=null) { replaceUsers(numUsrs);}  
     var datos = res[1];
     var idNum = res[0];
-	if (isJson(datos)) {
+	if (isJson(datos) ) {
 		var obj = JSON.parse(datos);
 		console.log("got shape data from server");
         if (idNum != ID) {
-    canvas.loadFromJSON(JSON.parse(datos), canvas.renderAll.bind(canvas));
-} else {
-    console.log("sender and reciver are the same, ignoring");
-}
-
+            canvas.loadFromJSON(JSON.parse(datos), canvas.renderAll.bind(canvas));
+        } else {
+            console.log("sender and reciver are the same, ignoring");
+        }
 		//drawRecivedObj(obj.type, obj.data);
 	} else {
         console.log("WARNING: other info recived: "+ (datos));
@@ -213,15 +215,18 @@ function initServer() {
 function onClose() {
 	console.log("onClose entry")
     writeToScreen('<span style="color: red;">DISCONNECTED</span> ');
-    //websocket.terminate();
+    websocket.send('marchaUSR');
+    console.log("onClose signal")
+  //  websocket.terminate();
     websocket.close();
+    console.log("onClose end")
 }
 
 
 function onError(evt) {
 	console.log("onError entry")
-	writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
-    //websocket.terminate();
+    writeToScreen('<span style="color: red;">ERROR:</span> ' + ID);
+   // websocket.terminate();
 	websocket.close();
 }
 
@@ -232,3 +237,17 @@ function writeToScreen(message) {
 	pre.innerHTML = message;
 	output.appendChild(pre);
 }
+
+function replaceUsers(usuariosConectadosNuevo) {
+    console.log("replaceIDToScreen entry")
+    var target= document.getElementById('usuarios_conectados');
+	var pre = document.createElement("p");
+    pre.innerHTML = '<span style="color: blue;">'+usuariosConectadosNuevo+'</span> ';
+    target.removeChild(target.firstChild);
+    target.appendChild(pre);
+    console.log("replaceIDToScreen end")
+}
+
+
+
+
