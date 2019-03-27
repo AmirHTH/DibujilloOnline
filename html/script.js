@@ -151,14 +151,13 @@ function onMessageFromServer(message) {
     console.log('received data: '+ message.data);
     var res = message.data.split("@");
     var numUsrs = res[2];
-   
     if (numUsrs!=null) { replaceUsers(numUsrs);}  
     var datos = res[1];
     var idNum = res[0];
 	if (isJson(datos) ) {
 		var obj = JSON.parse(datos);
 		console.log("got shape data from server");
-        if (idNum != ID) {
+        if ((idNum != ID) && (String(datos).length>31)) {
             canvas.loadFromJSON(JSON.parse(datos), canvas.renderAll.bind(canvas));
         } else {
             console.log("sender and reciver are the same, ignoring");
@@ -215,8 +214,8 @@ function initServer() {
 function onClose() {
 	console.log("onClose entry")
     writeToScreen('<span style="color: red;">DISCONNECTED</span> ');
-    websocket.send('marchaUSR');
-    console.log("onClose signal")
+    //websocket.send('marchaUSR');
+   // console.log("onClose signal")
   //  websocket.terminate();
     websocket.close();
     console.log("onClose end")
