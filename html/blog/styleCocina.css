@@ -1,7 +1,7 @@
 body {
     background-color:white;
     /*background-image: radial-gradient(farthest-corner at  05%, white, rgb(250, 240, 250)); */
-	width: 90%;
+	width: 95%;
 	margin: 0.2em auto;
 	padding:2%;
     font-family: Verdana;
@@ -9,25 +9,55 @@ body {
     display: grid;
     grid-template-areas:
       'header header header header header header'
-      'deco1   main   main   main   main   deco2'
+      'deco1  main   main   main   main   deco2'
       'footer footer footer footer footer footer';
     grid-gap: 10px;
+    
 
 }
 
+header {
+    background-color:rgb(236, 245, 233);;
+    width: 97%;
+    margin:1.2em auto;
+    padding: 1.5em ;
+
+}
+
+footer {
+    background-color:rgb(236, 245, 233);;
+    width: 97%;
+    margin:1.2em auto;
+    padding: 1.5em ;
+}
+
 h1 {
-    font-size: 2em;
+    font-size: 2.25em;
     color: rgb(105, 78, 3);
+    text-decoration: underline overline dotted goldenrod;
+    text-align: center;
+
 
 }
 h2 {
     font-size:1.75em;
     color: rgb(73, 49, 3);
+    -webkit-transition: width 2s; /* Safari */
+    transition: width 2s;
 
 }
 h3 {
     font-size: 1.5em;
     color: rgb(54, 30, 2);
+    -webkit-transition: width 2s; /* Safari */
+    transition: width 2s;
+
+}
+h4 {
+    font-size: 1.5em;
+    color: rgb(44, 26, 5);
+    -webkit-transition: width 2s; /* Safari */
+    transition: width 2s;
 
 }
 
@@ -35,23 +65,30 @@ body > div {
     background-color: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding: 20px 0;
-    font-size: 30px;
-
+    
   }
 
 .item1 { grid-area: header; 
 }
 .item2 { grid-area: deco1; 
-    background-color: goldenrod;
-    padding: 3%;
+    margin: 1%;
+    padding: 1%;
+   
+   
 }
 .item3 { grid-area: main; 
 }
-.item4 { grid-area: footer; 
+.item4 { 
+    grid-area: footer; 
+    text-align: center;
+    font-size: 0.8em;
+    color : rgb(105, 78, 3);
 }
-.item5 { grid-area: deco2; 
-    background-color: goldenrod;
-    padding: 3%;
+
+.item5 { grid-area: deco2;   
+    margin: 1%;
+    padding: 1%;
+   
 }
 
 #listadoIMG {
@@ -101,11 +138,15 @@ body > div {
 
 #picplace {
     z-index:5;
-    position: relative;
+    position: absolute;
     cursor: pointer; 
     padding: 5px;
-   
+    max-width: 100%;
     align-content: center;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+   
 }
 
 #picasa {
@@ -123,4 +164,16 @@ body > div {
     border: 12px outset goldenrod;
     border-radius: 2em;
     transform: translateX(-50%);
+  }
+
+  #rrss {
+     float: right;
+     background-color: rgba(179, 243, 179, 0.25);
+     margin: 5px;
+     padding: 5px;
+     color: rgb(105, 83, 27)
+  }
+
+  .rs {
+      cursor:pointer;
   }
