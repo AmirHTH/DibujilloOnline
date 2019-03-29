@@ -1,0 +1,126 @@
+body {
+    background-color:white;
+    /*background-image: radial-gradient(farthest-corner at  05%, white, rgb(250, 240, 250)); */
+	width: 90%;
+	margin: 0.2em auto;
+	padding:2%;
+    font-family: Verdana;
+    
+    display: grid;
+    grid-template-areas:
+      'header header header header header header'
+      'deco1   main   main   main   main   deco2'
+      'footer footer footer footer footer footer';
+    grid-gap: 10px;
+
+}
+
+h1 {
+    font-size: 2em;
+    color: rgb(105, 78, 3);
+
+}
+h2 {
+    font-size:1.75em;
+    color: rgb(73, 49, 3);
+
+}
+h3 {
+    font-size: 1.5em;
+    color: rgb(54, 30, 2);
+
+}
+
+body > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+
+  }
+
+.item1 { grid-area: header; 
+}
+.item2 { grid-area: deco1; 
+    background-color: goldenrod;
+    padding: 3%;
+}
+.item3 { grid-area: main; 
+}
+.item4 { grid-area: footer; 
+}
+.item5 { grid-area: deco2; 
+    background-color: goldenrod;
+    padding: 3%;
+}
+
+#listadoIMG {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+   
+    flex-wrap: wrap;
+
+    background-color: rgb(222, 241, 223);
+}
+
+#listadoIMG > img {
+    width: code (20% - 2em) ;
+    height: 5em;
+    /*
+    margin-right: 0.5em;
+    nth-child (4n) {margin-right:0}
+   */ 
+  
+   
+    margin: 0.6em;
+    padding: 0.6em;
+    border: 1px outset goldenrod;
+    border-radius: 0.4em;
+
+   -webkit-filter: contrast(180%);
+   filter: contrast(180%);
+
+}
+
+#listadoIMG > img:hover {
+    -webkit-transform: scale(1.2);
+    transition: 0.4s ease;
+    transform: scale(1.2);
+    border: 0px outset goldenrod;
+    cursor: pointer; 
+
+ 
+
+}
+
+.imgPort {
+    display:none;
+}
+
+#picplace {
+    z-index:5;
+    position: relative;
+    cursor: pointer; 
+    padding: 5px;
+   
+    align-content: center;
+}
+
+#picasa {
+    position: fixed;
+    display: none;
+    width: 80%;
+    height: 80%;
+    top: 2%;
+    left: 50%;
+    right: 0;
+    bottom: 1%;
+    background-color: rgba(0,0,0,0.70);
+    z-index: 2;
+    cursor: pointer;
+    border: 12px outset goldenrod;
+    border-radius: 2em;
+    transform: translateX(-50%);
+  }
