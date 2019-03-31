@@ -19,6 +19,8 @@ var clients = [];
 
 //var contador=0;
 
+var mensaje;
+
 
 console.log('Lanzando');
 /*
@@ -31,6 +33,12 @@ wss.on('connection', function connection(ws) {
     //var con = request.accept('any-protocol', request.origin)
     clients.push(ws)
     console.log('Ha conectado un usuario, hay: '+clients.length);
+    if (ws.readyState === ws.OPEN) {
+      // if (message.length >= oldMsg.length) {
+          // oldMsg = message;
+           ws.send(mensaje+"@"+clients.length);
+      // }
+   }
    // ws.send("conectado", "pepe");
    // ws.on('marchaUSR',  function incoming(ws) { console.log("cerrando"+ws); clients.pop(ws); });
 
@@ -49,6 +57,7 @@ wss.on('connection', function connection(ws) {
         {
            contador++;
         }*/
+        mensaje=message;
         clients.forEach(function(client) {
             if (client.readyState === client.OPEN) {
                // if (message.length >= oldMsg.length) {
