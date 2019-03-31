@@ -8,7 +8,7 @@ if (window.WebSocket) {
 //window.addEventListener("load",init);
 
 //wsUri = "ws://echo.websocket.org";
-wsUri = "ws://localhost:9001";
+wsUri = "ws://88.9.159.192:9001";
 
 var ID = Math.floor((Math.random() * 100000000) + 2);
 
