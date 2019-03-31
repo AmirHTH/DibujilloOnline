@@ -3,8 +3,21 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Cocina</title>
-	<script src="scriptCocina.js"></script>
+    <title>Cocina</title>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+    <script src="scriptCocina.js"></script>
+
+    
+    <script>
+        /* SCRIPT PARA VIDEOs */ 
+            $(document).ready(function(){
+              $(".videoreproductor").each(function(){
+
+                verVideo(this);
+              });
+            });
+    </script>
+
 	<link rel="stylesheet" href="styleCocina.css"/>
 </head>
 <body>
@@ -12,8 +25,7 @@
             <h1>Semanal de Recetas</h1>
             <section>
                     <h2>Cada semana una magnífica receta</h2>
-                    <h3>Esta semana: Ensalada de pepinos</h3>
-                    <p>hola</p>
+                    <h3>Esta semana: Fabada</h3>
             </section>
 
     </header>
@@ -24,8 +36,9 @@
 
     <div class="item5">
 
-    </div>
+           
 
+    </div>
 
 
     <div class="item3">
@@ -33,35 +46,46 @@
 
         <section>
             <h2>Difruta de nuestros maravillos cocineros explicando la receta a su manera</h2>
-            <h3>Aprenderas un monton</h3>
+            <h3>Aprenderas un monton con nuestras videorecetas</h3>
+             <!--  componente video  INI     -->
+              
+            <div id="videos">
+                <div id="ibBQBEMT2k0" class="videoreproductor"></div>
+                <div id="35194979" class="videoreproductor"></div>
+                <div id="x6v7jm6" class="videoreproductor"></div>
+            </div>
+       
+             <!--  componente video  fin     -->
             
         </section>
 
         <section>
             <h2>Vuestras versiones</h2>
             <h3>Envianos una foto de como te ha salido la receta y la publicaremos</h3>
-            <div id="galeria"> <!-- meter en ancho y hide auto -->
-                <div id="listadoIMG">
-                    <img src="/blog/img/plato1.png" alt="Smiley face" class="imgGal" onclick="on(this)"> 
-                    <img src="/blog/img/plato2.png" alt="Smiley face" class="imgGal" onclick="on(this)"> 
-                    <img src="/blog/img/plato3.png" alt="Smiley face" class="imgGal" onclick="on(this)"> 
+            <div>   <!--  componente galeria  INI     -->
+                <div id="galeria"> <!-- meter en ancho y hide auto -->
+                    <div id="listadoIMG">
+                        <img src="/blog/img/plato1.jpg" alt="Smiley face" class="imgGal" onclick="on(this)"> 
+                        <img src="/blog/img/plato2.jpg" alt="Smiley face" class="imgGal" onclick="on(this)"> 
+                        <img src="/blog/img/plato3.jpg" alt="Smiley face" class="imgGal" onclick="on(this)"> 
+                        <img src="/blog/img/plato4.jpg" alt="Smiley face" class="imgGal" onclick="on(this)"> 
+                        <img src="/blog/img/plato5.jpg" alt="Smiley face" class="imgGal" onclick="on(this)"> 
+                        <img src="/blog/img/plato6.jpg" alt="Smiley face" class="imgGal" onclick="on(this)"> 
+                        <img src="/blog/img/plato7.jpg" alt="Smiley face" class="imgGal" onclick="on(this)"> 
 
 
-                </div>
-            <!-- 
-                <div id="viewport">
-                        <img src="/blog/img/plato1.png" alt="Smiley face" class="imgPort"> 
-                        <img src="/blog/img/plato2.png" alt="Smiley face" class="imgPort"> 
-                        <img src="/blog/img/plato3.png" alt="Smiley face" class="imgPort"> 
-                </div>
-            -->
+                    </div>
+                <!--    siguiente div mmuestra  las imagenes i    -->
 
-                <div  id="picasa"  onclick="off()">
-                    <img id="picplace" src=""  > 
+                    <div  id="picasa"  onclick="off()">
+                        <img id="picplace" src=""  > 
+                    </div>
+                    
                 </div>
-                 
-            </div>
+            </div>   <!--  componente galeria  FIN     -->
         </section>
+
+       
     </div>
     <footer class="item4">
         

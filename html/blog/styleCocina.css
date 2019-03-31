@@ -6,13 +6,15 @@ body {
 	padding:2%;
     font-family: Verdana;
     
+    /* INICIO BLOQUE GRID PARTE I */ 
     display: grid;
     grid-template-areas:
       'header header header header header header'
       'deco1  main   main   main   main   deco2'
       'footer footer footer footer footer footer';
     grid-gap: 10px;
-    
+
+    /* FIN BLOQUE GRID PARTE I */ 
 
 }
 
@@ -42,22 +44,19 @@ h1 {
 h2 {
     font-size:1.75em;
     color: rgb(73, 49, 3);
-    -webkit-transition: width 2s; /* Safari */
-    transition: width 2s;
+  
 
 }
 h3 {
     font-size: 1.5em;
     color: rgb(54, 30, 2);
-    -webkit-transition: width 2s; /* Safari */
-    transition: width 2s;
+  
 
 }
 h4 {
     font-size: 1.5em;
     color: rgb(44, 26, 5);
-    -webkit-transition: width 2s; /* Safari */
-    transition: width 2s;
+
 
 }
 
@@ -67,6 +66,8 @@ body > div {
     padding: 20px 0;
     
   }
+
+  /* INICIO BLOQUE GRID PARTE II*/ 
 
 .item1 { grid-area: header; 
 }
@@ -90,11 +91,14 @@ body > div {
     padding: 1%;
    
 }
+/* FIN BLOQUE GRID PARTE II */ 
+
+/* INICIO BLOQUE gALERIA */ 
 
 #listadoIMG {
     display:flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
    
     flex-wrap: wrap;
@@ -127,6 +131,7 @@ body > div {
     transform: scale(1.2);
     border: 0px outset goldenrod;
     cursor: pointer; 
+   
 
  
 
@@ -166,6 +171,8 @@ body > div {
     transform: translateX(-50%);
   }
 
+  /* FIN BLOQUE gALERIA */ 
+
   #rrss {
      float: right;
      background-color: rgba(179, 243, 179, 0.25);
@@ -176,4 +183,35 @@ body > div {
 
   .rs {
       cursor:pointer;
+  }
+/* COMPONENTE VIDEOS*/
+  .videoreproductor {
+   
+    background-color: black;
+  
+  }
+
+  #videos {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+   
+    flex-wrap: wrap;
+    background-color: black;
+    margin: 5px;
+    padding: 5px;
+ 
+    border: 2px outset goldenrod;
+
+
+  }
+
+  .videoreproductor:hover {
+   
+    background-color: black;
+    -webkit-transform: scale(1.1);
+    transition: 0.4s ease;
+    transform: scale(1.1);
+ 
   }
